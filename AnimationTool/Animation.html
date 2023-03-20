@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Generador de coordenadas</title>
+  </head>
+  <body>
+    <label>
+      Coordenada de inicio (x,y,z):
+      <input type="text" id="start" value="6,-56,-18" />
+    </label>
+    <br />
+    <label>
+      Coordenada de fin (x,y,z):
+      <input type="text" id="end" value="-5,-60,-4" />
+    </label>
+    <br />
+    <label>
+      Cantidad de puntos:
+      <input type="number" id="numPoints" value="50" />
+    </label>
+    <br />
+    <button id="generateButton">Generar coordenadas</button>
+    <br />
+    <textarea id="output" cols="80" rows="10"></textarea>
+
+    <script>
+      function generateCoords() {
+        // Obtener los valores del formulario
+        const startStr = document.getElementById("start").value;
+        const endStr = document.getElementById("end").value;
+        const numPoints = document.getElementById("numPoints").value;
+
+        // Convertir los strings en arrays de números
+        const start = startStr.split(",").map(parseFloat);
+        const end = endStr.split(",").map(parseFloat);
+
+        // Calcular la distancia entre los puntos en cada eje
+        const distX = (end[0] - start[0]) / numPoints;
+        const distY = (end[1] - start[1]) / numPoints;
+        const distZ = (end[2] - start[2]) / numPoints;
+
+        // Generar las coordenadas
+        let output = "";
+        for (let i = 0; i < numPoints; i++) {
+          const x = start[0] + i * distX;
+          const y = start[1] + i * distY;
+          const z = start[2] + i * distZ;
+
+          const command = `/tp @a ${x} ${y} ${z}`;
+          output += command + "\n";
+        }
+
+        // Mostrar las coordenadas en el textarea
+        const outputEl = document.getElementById("output");
+        outputEl.value = output;
+      }
+
+      // Asignar la función al botón
+      const generateButton = document.getElementById("generateButton");
+      generateButton.addEventListener("click", generateCoords);
+    </script>
+  </body>
+</html>
