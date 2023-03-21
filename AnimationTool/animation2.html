@@ -2,97 +2,128 @@
 <html>
   <head>
     <title>Generador de coordenadas</title>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
   </head>
   <body>
     <h1>Generador de coordenadas</h1>
     <form>
       <label for="coordInicial">Coordenada inicial:</label>
-      <input type="text" id="coordInicial" name="coordInicial"><br><br>
+      <input type="text" id="coordInicial" name="coordInicial" /><br /><br />
       <label for="coordIntermedia">Coordenada intermedia:</label>
-      <input type="text" id="coordIntermedia" name="coordIntermedia"><br><br>
+      <input
+        type="text"
+        id="coordIntermedia"
+        name="coordIntermedia"
+      /><br /><br />
       <label for="coordFinal">Coordenada final:</label>
-      <input type="text" id="coordFinal" name="coordFinal"><br><br>
+      <input type="text" id="coordFinal" name="coordFinal" /><br /><br />
       <label for="numPuntos">Número de puntos:</label>
-      <input type="number" id="numPuntos" name="numPuntos" value="50"><br><br>
+      <input
+        type="number"
+        id="numPuntos"
+        name="numPuntos"
+        value="50"
+      /><br /><br />
       <label for="coordMirar">Apuntar hacia:</label>
-      <input type="text" id="coordMirar" name="coordMirar"><br><br>
+      <input type="text" id="coordMirar" name="coordMirar" /><br /><br />
       <label for="curva">Seleccionar curva:</label>
-        <select id="curva" name="curva">
+      <select id="curva" name="curva">
         <option value="exponencial">Exponencial</option>
         <option value="lineal">Lineal</option>
         <option value="parabolica">Parabólica</option>
-        <option value="gompertz">Gompertz</option>
-        </select><br><br>
+        <option value="gompertz">Gompertz</option></select
+      ><br /><br />
 
-      <input type="button" value="Generar coordenadas" onclick="generarCoordenadas()">
+      <input
+        type="button"
+        value="Generar coordenadas"
+        onclick="generarCoordenadas()"
+      />
     </form>
-    <br>
+    <br />
     <textarea id="coordenadas" rows="10" cols="50" readonly></textarea>
-                <script>
-                   function generarCoordenadas() {
-  var coordInicial = document.getElementById("coordInicial").value.split(" ");
-  var coordIntermedia = document.getElementById("coordIntermedia").value.split(" ");
-  var coordFinal = document.getElementById("coordFinal").value.split(" ");
-  var numPuntos = parseInt(document.getElementById("numPuntos").value);
-  var coordMirar = document.getElementById("coordMirar").value;
-  var xInicial = parseInt(coordInicial[0]);
-  var yInicial = parseInt(coordInicial[1]);
-  var zInicial = parseInt(coordInicial[2]);
-  var xIntermedia = parseInt(coordIntermedia[0]);
-  var yIntermedia = parseInt(coordIntermedia[1]);
-  var zIntermedia = parseInt(coordIntermedia[2]);
-  var xFinal = parseInt(coordFinal[0]);
-  var yFinal = parseInt(coordFinal[1]);
-  var zFinal = parseInt(coordFinal[2]);
-  var coords = "";
-  var x, y, z;
-  var curva = document.getElementById("curva").value;
+    <script>
+      function generarCoordenadas() {
+        var coordInicial = document
+          .getElementById("coordInicial")
+          .value.split(" ");
+        var coordIntermedia = document
+          .getElementById("coordIntermedia")
+          .value.split(" ");
+        var coordFinal = document.getElementById("coordFinal").value.split(" ");
+        var numPuntos = parseInt(document.getElementById("numPuntos").value);
+        var coordMirar = document.getElementById("coordMirar").value;
+        var xInicial = parseInt(coordInicial[0]);
+        var yInicial = parseInt(coordInicial[1]);
+        var zInicial = parseInt(coordInicial[2]);
+        var xIntermedia = parseInt(coordIntermedia[0]);
+        var yIntermedia = parseInt(coordIntermedia[1]);
+        var zIntermedia = parseInt(coordIntermedia[2]);
+        var xFinal = parseInt(coordFinal[0]);
+        var yFinal = parseInt(coordFinal[1]);
+        var zFinal = parseInt(coordFinal[2]);
+        var coords = "";
+        var x, y, z;
+        var curva = document.getElementById("curva").value;
 
-//tipo de curva seleccion
+        //tipo de curva seleccion
 
-for (var i = 0; i <= numPuntos; i++) {
-  var t = i / numPuntos;
-  if (curva == "exponencial") {
-    x = exponencial(t, xInicial, xIntermedia, xFinal);
-    y = exponencial(t, yInicial, yIntermedia, yFinal);
-    z = exponencial(t, zInicial, zIntermedia, zFinal);
-  } else if (curva == "lineal") {
-    x = lineal(t, xInicial, xIntermedia, xFinal);
-    y = lineal(t, yInicial, yIntermedia, yFinal);
-    z = lineal(t, zInicial, zIntermedia, zFinal);
-  } else if (curva == "parabolica") {
-    x = parabolica(t, xInicial, xIntermedia, xFinal);
-    y = parabolica(t, yInicial, yIntermedia, yFinal);
-    z = parabolica(t, zInicial, zIntermedia, zFinal);
-  } else if (curva == "gompertz") {
-    x = gompertz(t, xInicial, xIntermedia, xFinal);
-    y = gompertz(t, yInicial, yIntermedia, yFinal);
-    z = gompertz(t, zInicial, zIntermedia, zFinal);
-  }
- 
-  function exponencial(t, a, b, c) {
-  return a * Math.exp(-b * t) + c;
-  }
-}
+        for (var i = 0; i <= numPuntos; i++) {
+          var t = i / numPuntos;
+          if (curva == "exponencial") {
+            x = exponencial(t, xInicial, xIntermedia, xFinal);
+            y = exponencial(t, yInicial, yIntermedia, yFinal);
+            z = exponencial(t, zInicial, zIntermedia, zFinal);
+          } else if (curva == "lineal") {
+            x = lineal(t, xInicial, xIntermedia, xFinal);
+            y = lineal(t, yInicial, yIntermedia, yFinal);
+            z = lineal(t, zInicial, zIntermedia, zFinal);
+          } else if (curva == "parabolica") {
+            x = parabolica(t, xInicial, xIntermedia, xFinal);
+            y = parabolica(t, yInicial, yIntermedia, yFinal);
+            z = parabolica(t, zInicial, zIntermedia, zFinal);
+          } else if (curva == "gompertz") {
+            x = gompertz(t, xInicial, xIntermedia, xFinal);
+            y = gompertz(t, yInicial, yIntermedia, yFinal);
+            z = gompertz(t, zInicial, zIntermedia, zFinal);
+          }
 
-//resultados
-  for (var i = 0; i <= numPuntos; i++) {
-    var t = i / numPuntos;
-    x = (1 - t) * (1 - t) * xInicial + 2 * (1 - t) * t * xIntermedia + t * t * xFinal;
-    y = (1 - t) * (1 - t) * yInicial + 2 * (1 - t) * t * yIntermedia + t * t * yFinal;
-    z = (1 - t) * (1 - t) * zInicial + 2 * (1 - t) * t * zIntermedia + t * t * zFinal;
-    coords += "/tp @a " + x + " " + y + " " + z + " facing " + coordMirar + "\n";
-  
-}
+          function exponencial(t, a, b, c) {
+            return a * Math.exp(-b * t) + c;
+          }
+        }
 
+        //resultados
+        for (var i = 0; i <= numPuntos; i++) {
+          var t = i / numPuntos;
+          x =
+            (1 - t) * (1 - t) * xInicial +
+            2 * (1 - t) * t * xIntermedia +
+            t * t * xFinal;
+          y =
+            (1 - t) * (1 - t) * yInicial +
+            2 * (1 - t) * t * yIntermedia +
+            t * t * yFinal;
+          z =
+            (1 - t) * (1 - t) * zInicial +
+            2 * (1 - t) * t * zIntermedia +
+            t * t * zFinal;
+          coords +=
+            "execute if score _test time_cinematic matches " +
+            i +
+            " run tp @a " +
+            x +
+            " " +
+            y +
+            " " +
+            z +
+            " facing " +
+            coordMirar +
+            "\n";
+        }
 
-  document.getElementById("coordenadas").value = coords;
-}
-
-        
-  
-
+        document.getElementById("coordenadas").value = coords;
+      }
     </script>
   </body>
 </html>
