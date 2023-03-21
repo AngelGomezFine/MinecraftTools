@@ -26,14 +26,7 @@
       /><br /><br />
       <label for="coordMirar">Apuntar hacia:</label>
       <input type="text" id="coordMirar" name="coordMirar" /><br /><br />
-      <label for="curva">Seleccionar curva:</label>
-      <select id="curva" name="curva">
-        <option value="exponencial">Exponencial</option>
-        <option value="lineal">Lineal</option>
-        <option value="parabolica">Parabólica</option>
-        <option value="gompertz">Gompertz</option></select
-      ><br /><br />
-
+   
       <input
         type="button"
         value="Generar coordenadas"
@@ -64,34 +57,9 @@
         var zFinal = parseInt(coordFinal[2]);
         var coords = "";
         var x, y, z;
-        var curva = document.getElementById("curva").value;
+        
 
-        //tipo de curva seleccion
-
-        for (var i = 0; i <= numPuntos; i++) {
-          var t = i / numPuntos;
-          if (curva == "exponencial") {
-            x = exponencial(t, xInicial, xIntermedia, xFinal);
-            y = exponencial(t, yInicial, yIntermedia, yFinal);
-            z = exponencial(t, zInicial, zIntermedia, zFinal);
-          } else if (curva == "lineal") {
-            x = lineal(t, xInicial, xIntermedia, xFinal);
-            y = lineal(t, yInicial, yIntermedia, yFinal);
-            z = lineal(t, zInicial, zIntermedia, zFinal);
-          } else if (curva == "parabolica") {
-            x = parabolica(t, xInicial, xIntermedia, xFinal);
-            y = parabolica(t, yInicial, yIntermedia, yFinal);
-            z = parabolica(t, zInicial, zIntermedia, zFinal);
-          } else if (curva == "gompertz") {
-            x = gompertz(t, xInicial, xIntermedia, xFinal);
-            y = gompertz(t, yInicial, yIntermedia, yFinal);
-            z = gompertz(t, zInicial, zIntermedia, zFinal);
-          }
-
-          function exponencial(t, a, b, c) {
-            return a * Math.exp(-b * t) + c;
-          }
-        }
+        
 
         //resultados
         for (var i = 0; i <= numPuntos; i++) {
